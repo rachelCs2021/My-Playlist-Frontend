@@ -1,0 +1,25 @@
+.song{
+    border: 2px solid black;
+    font-family: "Orelega One";
+    font-size: 20px;
+    padding: 5px;
+    width: 15%;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    height: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+.song:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  } 
+.container {
+    padding: 2px 16px;
+  }
+.delete{
+      position: relative;
+      top: 0;
+      left: 80px;
+      border: white;
+      background-color: white;
+  }

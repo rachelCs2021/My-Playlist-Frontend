@@ -1,0 +1,17 @@
+.nav{
+    height: 15%;
+    background-color: black;
+    position: fixed;
+    width: 100%;
+}
+h1{
+    color: red;
+}
+img{
+    height: 93%;
+    position: absolute;
+    right: 0;
+}
+.form{
+    margin-left: 40%;
+}

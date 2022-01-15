@@ -1,0 +1,19 @@
+.playlist{
+    /* border: 2px solid black; */
+    /* width: 75%; */
+    /* margin: 5%; */
+    padding: 20px;
+    margin-top: 30px;
+    display: flex;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    margin-left: 20px;
+    margin-right: 20px;
+    /* margin-bottom: 20px; */
+}
+.play{
+    margin-top: 30px;
+}
+h2{
+    text-shadow: 2px 2px red;
+}
