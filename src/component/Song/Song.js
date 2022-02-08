@@ -1,21 +1,21 @@
+
 import "./Song.css"
 
 
-const Song = ({ id, name, by, image, remove }) => {
+const Song = ({ id, name, by, image, onClickPlayer }) => {
     // console.log(id);
     return (
 
-        <div className="song">
-            <button className="delete" id={id}
-                onClick={() => remove(id)}>❌</button>
-            {/* <img
-                src={require(image)}
+        <div className="playlistSong" id={id} onClick={() => onClickPlayer(id)}>
+            <img
+                src={image}
                 alt={name}
                 style={{ width: "100%", height: "200px", }}
-            /> */}
-            <div className="container">
+            />
+            <div className="containerPlaylist">
                 <h4><b>{name}</b></h4>
                 <p>{by}</p>
+
             </div>
         </div>
     )

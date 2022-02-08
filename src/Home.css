@@ -1,0 +1,18 @@
+
+/* .Home{
+  /* background-color: rgb(81, 81, 102); */
+/* } */ 
+
+.parallax{
+  min-height: 2000px; 
+  background-image: url("../1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.containSearchAndRecomend{
+  display: flex;
+}
+

@@ -1,75 +1,65 @@
+import Home from "./Home";
+import React, { useEffect, useState } from "react";
+import Play from "./component/play-video/Play";
+import Login from "./component/login/Login";
+import Search from "./component/Search-song/Search";
+import Context from "./Context/Context";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Navigate
+} from "react-router-dom";
+import Playlist from "./component/Playlist/Playlist";
 
-import './App.css';
-import Playlist from './component/Playlist/Playlist';
-import Header from './component/Header/Header';
-import { useRef, useState } from 'react';
+
+const App = () => {
+
+    const [token, setToken] = useState()
+    const [userAccessToken, setUserAccessToken] = useState(null);
+    const [isUserConnected, setUserConnected] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("Token");
+        if (token) {
+            setUserAccessToken(token);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!userAccessToken) {
+            setUserConnected(false);
+            return;
+        }
+        setUserConnected(true);
+    }, [userAccessToken]);
 
 
-function App() {
-
-  const songsList = [
-    {
-      id: 1,
-      name: "אלוף העולם",
-      by: "Hanan Ben Ari",
-      img: "./1.jpg"
-    },
-    {
-      id: 2,
-      name: "איזון",
-      by: "Hanan Ben Ari",
-      img: "./2.jpg"
-    },
-    {
-      id: 3,
-      name: "הנסיון הזה",
-      by: "Ishay Ribo",
-      img: "./3.jpg"
-    },
-    {
-      id: 4,
-      name: "סיבת הסיבות",
-      by: "Ishay Ribo",
-      img: "./4.jpg"
-    },
-    {
-      id: 5,
-      name: "זוכר אני",
-      by: "Ishay Ribo",
-      img: "./5.jpg"
-    },
-  ]
-
-  const [songsArr, setSongsArr] = useState(songsList);
-
-  const removeFromList = (id) => {
-    console.log("remove");
-    setSongsArr(songsArr.filter((song) => song.id !== id));
-    console.log(songsArr);
-  }
-
-  const idRef = useRef(songsList.length)
-
-  const addSong = (nameSong) => {
-    idRef.current++
-
-    setSongsArr([...songsArr,
-    {
-      id: idRef.current,
-      name: ` ${nameSong}`,
-      by: `artist ${idRef.current}`,
-    }
-    ])
-
-  }
-  console.log(songsArr);
-
-  return (
-    <div className="App">
-      <Header addsong={addSong} />
-      <Playlist list={songsArr} remove={removeFromList} />
-    </div>
-  );
+    return (
+        <Context.Provider
+            value={{
+                userAccessToken,
+                isUserConnected,
+                setUserAccessToken,
+            }}>
+            <Router>
+                <Routes>
+                    {/* {token &&
+                        <> */}
+                    <Route exact path="/home" element={<Home />} />
+                    <Route exact path="/Playlist" element={<Playlist />} />
+                    <Route exact path="/Play/:id" element={<Play />} />
+                    <Route exact path="/search" element={<Search />} />
+                    {/* </>} */}
+                    <Route exact path="/login" element={<Login />} />
+                    {/* {token || <Route
+                        path="*"
+                        element={<Navigate to="/login" />}
+                    />} */}
+                </Routes>
+            </Router>
+        </Context.Provider>
+    )
 }
 
 export default App;

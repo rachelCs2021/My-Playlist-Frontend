@@ -1,0 +1,36 @@
+
+.recomendSong{
+    border: 2px solid black;
+    font-family: "Orelega One";
+    color: black;
+    background-color: white;
+    opacity: 0.4;
+    font-size: 20px;
+    padding: 5px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    height: 300px;
+}
+.recomendSong:hover {
+    /* box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2); */
+    background-color: rgb(159, 150, 134);
+  } 
+  .containerRecommend{
+    padding: 2px 16px;
+    text-align: left;
+  }
+  .img-recomend-song{
+    width: 100%;
+  }
+  .nameOfSong{
+      font-size: 15px;
+  }
+  .artistOfSong{
+      font-size: 10px;
+  }
+  /* .img-recomend-song{
+    width: 360;
+    height: 202;
+  } */

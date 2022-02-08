@@ -1,43 +1,23 @@
 import "./Header.css"
-import { useState, useRef, useEffect } from "react";
+// import react from 'react';
+import { Link } from "react-router-dom";
+import HomeIcon from '@mui/icons-material/Home';
+import MusicVideoIcon from '@mui/icons-material/MusicVideo';
+import SearchIcon from '@mui/icons-material/Search';
 
 
-const Header = ({ addsong }) => {
-
-    const [val, setVal] = useState("")
-    const inputRef = useRef(null);
-    console.log(inputRef);
-    useEffect(() => {
-        inputRef.current.focus();
-    })
+const Header = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-dark bg-dark">
+            <nav className="navbar navbar-dark bg-dark fixed-top">
                 <div className="container-fluid">
-                    <img
-                        src={require("./logo.png")}
-                        alt="logo" />
-                    <form className="d-flex form">
-                        <input
-                            className="form-control me-3"
-                            type="text"
-                            placeholder="Enter For Add"
-                            // aria-label="Search"
-                            onChange={(e) => setVal(e.target.value)}
-                            value={val}
-                            ref={inputRef} />
-
-                        <button
-                            className="btn btn-outline-danger"
-                            type="submit"
-                            onClick={(e) => {
-                                console.log(val);
-                                addsong(val)
-                                e.preventDefault()
-                                setVal("");
-                            }}>Add</button>
-                    </form>
+                    <h1 className="mainTitle">My Music</h1>
+                    {/* <div className="containerIcons">
+                        <Link to={`/home`} className="playlistTitle" ><HomeIcon /></Link>
+                        <Link to={`/Playlist`} className="playlistTitle" ><MusicVideoIcon /></Link>
+                        <Link to={`/search`} className="playlistTitle" ><SearchIcon /></Link>
+                    </div> */}
                 </div>
             </nav>
         </div>

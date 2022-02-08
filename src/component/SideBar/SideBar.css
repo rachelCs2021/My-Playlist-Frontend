@@ -1,0 +1,24 @@
+.div-side-bar{
+    height: 100vh;
+    width: 15%;
+    position: fixed;
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-left: 85%;
+    /* margin-top: 5%; */
+    direction: rtl;
+}
+.container-title-and-icon{
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    padding-right: 8px;
+}
+.container-title-and-icon:hover{
+   background-color: rgb(110, 62, 62);
+}
+.title-of-sidebar{
+    color: white;
+    margin-left: 13px;
+}
