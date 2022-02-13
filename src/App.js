@@ -1,7 +1,7 @@
 import Home from "./Home";
 import React, { useEffect, useState } from "react";
 import Play from "./component/play-video/Play";
-import Login from "./component/login/Login";
+import LogIn from "./component/login/LogIn";
 import Search from "./component/Search-song/Search";
 import Context from "./Context/Context";
 import {
@@ -11,6 +11,7 @@ import {
     Navigate
 } from "react-router-dom";
 import Playlist from "./component/Playlist/Playlist";
+import Register from "./component/Register/Register";
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
             return;
         }
         setUserConnected(true);
+        setToken(true)
     }, [userAccessToken]);
 
 
@@ -44,18 +46,19 @@ const App = () => {
             }}>
             <Router>
                 <Routes>
-                    {/* {token &&
-                        <> */}
-                    <Route exact path="/home" element={<Home />} />
-                    <Route exact path="/Playlist" element={<Playlist />} />
-                    <Route exact path="/Play/:id" element={<Play />} />
-                    <Route exact path="/search" element={<Search />} />
-                    {/* </>} */}
-                    <Route exact path="/login" element={<Login />} />
-                    {/* {token || <Route
+                    {token &&
+                        <>
+                            <Route exact path="/home" element={<Home />} />
+                            <Route exact path="/Playlist" element={<Playlist />} />
+                            <Route exact path="/Play/:idSong" element={<Play />} />
+                            <Route exact path="/search" element={<Search />} />
+                        </>}
+                    <Route exact path="/login" element={<LogIn />} />
+                    <Route exact path="/register" element={<Register />} />
+                    {token || <Route
                         path="*"
                         element={<Navigate to="/login" />}
-                    />} */}
+                    />}
                 </Routes>
             </Router>
         </Context.Provider>

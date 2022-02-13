@@ -1,15 +1,17 @@
 import "./Search.css"
 import { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import RecomendSong from "../RocommendedSongs/RecomendSong";
 import Header from "../Header/Header";
 import SideBar from "../SideBar/SideBar";
+import Spinner from "../Spinner/Spinner";
 // import { Link } from "react-router-dom";
-
 
 const Search = ({ onClick }) => {
 
     const [songs, setSongs] = useState([])
+    const [spinner, setSpinner] = useState(<Spinner />);
+
+    const navigate = useNavigate();
 
     const freeText = (e) => {
         console.log("search");
@@ -22,6 +24,12 @@ const Search = ({ onClick }) => {
                 console.log(searchResult);
                 setSongs(searchResult)
             }).catch(err => console.log(err))
+
+        if (songs.length === 0 || !songs) {
+            setSpinner(<h1 className="noResultSearch">No Results</h1>);
+        }
+        // if (songs.length > 0) {
+        // }
     }
     console.log(songs);
 
@@ -32,18 +40,14 @@ const Search = ({ onClick }) => {
         inputRef.current.focus();
     })
 
-    const happendOnClick = (e) => {
-        navigate(`/Play/${e.id}`)
-        searchh(e)
+    const happendOnClick = (id) => {
+        console.log("s");
+        // const searchClick = e.target.value
+        // console.log(searchClick);
+        console.log(id);
+        navigate(`/Play/${id}`)
+        // searchh(e)
     }
-
-    const searchh = (event) => {
-        onClick(event.target.value)
-        console.log(event.target.value);
-    }
-
-    // console.log(songs.img.url);
-    const navigate = useNavigate();
 
     return (
         <div className="parallax5">
@@ -62,20 +66,22 @@ const Search = ({ onClick }) => {
                 </form>
                 <div className="containerSearchAndRecomend">
                     <div className="containerSearchResult">
-                        <div className="SerchResult">
-                            {songs.map(song =>
-                                <div className="resultOfSearch" id={song.id} value={song.id} onClick={happendOnClick} >
-                                    <img className="searchImg" src={song.img.url} alt={song.title} />
-                                    <h5 className="titleResule">{song.title}</h5>
-                                </div>)}
-                        </div>
+                        {songs.length > 0 ? (
+                            <div className="SerchResult">
+                                {songs.map(song =>
+                                    <div className="resultOfSearch" id={song.id} onClick={() => happendOnClick(song.id)} >
+                                        <img className="searchImg" src={song.img.url} alt={song.title} />
+                                        <h5 className="titleResule">{song.title}</h5>
+                                    </div>)}
+                            </div>
+                        ) : (
+                            spinner
+                        )}
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-
-
 
 export default Search;

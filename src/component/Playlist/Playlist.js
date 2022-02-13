@@ -2,7 +2,8 @@ import Song from "../Song/Song";
 import Header from "../Header/Header";
 import "./Playlist.css"
 import SideBar from "../SideBar/SideBar";
-// import { useState } from 'react';
+import { useState } from 'react';
+import Context from "../../Context/Context";
 
 const Playlist = ({ remove }) => {
 
@@ -14,7 +15,7 @@ const Playlist = ({ remove }) => {
     // console.log(setSongsArr);
     // console.log(urlSong);
 
-    // const [playlist, setPlaylist] = useState([])
+    const [playlist, setPlaylist] = useState([])
 
     // const addToPlaylist = () => {
     //     setPlaylist(...playlist,)
@@ -66,21 +67,23 @@ const Playlist = ({ remove }) => {
     ]
 
     return (
-        <div className="parallax">
+        <div className="parallax5">
             <Header />
             <SideBar />
-            <div className="container-playlist-details">
-                <div className="playlistTitle2">
-                    <h2 className="title-playlist">My PlayList</h2>
-                </div>
-                <div className="containerPlaylist">
-                    <div className="playlistSongs">
-                        {playlistArr.map(song => (
-                            <Song key={song.id} id={song.id} name={song.name} by={song.by} image={song.img} remove={remove} />
-                        ))}
+            <Context.Provider value={{ setPlaylist }} >
+                <div className="container-playlist-details">
+                    <div className="playlistTitle2">
+                        <h2 className="title-playlist">My PlayList</h2>
+                    </div>
+                    <div className="containerPlaylist">
+                        <div className="playlistSongs">
+                            {playlistArr.map(song => (
+                                <Song key={song.id} id={song.id} name={song.name} by={song.by} image={song.img} remove={remove} />
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Context.Provider>
         </div>
     )
 }

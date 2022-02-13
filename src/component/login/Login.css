@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Concert+One&family=Fredoka+One&family=Luckiest+Guy&family=Orelega+One&family=Roboto:ital@1&family=Rubik:wght@800&family=Shrikhand&display=swap');
 
 .parallax1{
     height: 100vh; 
@@ -16,6 +17,9 @@
       color:  rgb(110, 62, 62);
       border-color: white;
       text-align: center;
+      font-family: 'Alfa Slab One', cursive;
+      -webkit-text-stroke: 2px white;
+      font-size: 60px;
   }
   .formLogin{
       background-color: white;

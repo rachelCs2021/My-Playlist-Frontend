@@ -1,38 +1,41 @@
 .parallax5{
-    min-height: 2000px; 
+    min-height: 720px; 
     background-image: url("../../../1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    padding-top: 60px;
   }
   .container-search{
-      margin-top: 90px;
+      margin-top: 20px;
       padding-top: 30px;
   }
 .searchInput{
     width: 25%;
-    margin-left: 33%;
+    margin-left: 31%;
     background-color: rgb(248, 248, 248);
     /* margin-top: 100px; */
     /* position: fixed; */
 }
 .containerSearchResult{
     display: flex;
+    width: 85%;
 }
 .SerchResult{
-   margin-top: 100px;
+   margin-top: 42px;
    display: flex;
    flex-direction: column;
+   /* width: 80%; */
 }
 .resultOfSearch{
     height: 150px;
     border: black;
     margin: 10px;
     padding: 10px;
-    background-color: rgb(201, 198, 183);
+    background-color: rgb(192, 170, 170);
     /* opacity: 0.5; */
-    width: 100%;
+    width: 967px;
     margin-left: 15%;
    border-radius: 5px;
    display: flex;
@@ -50,4 +53,12 @@
 }
 .containerSearchAndRecomend{
     display: flex;
+}
+.noResultSearch{
+    color: white;
+    /* margin-left: 40%; */
+    font-size: 2rem;
+   margin-left: 46%;
+   margin-top: 2%;
+    /* background-color: aqua; */
 }

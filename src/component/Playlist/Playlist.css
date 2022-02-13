@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Fredoka+One&family=Luckiest+Guy&family=Orelega+One&family=Roboto:ital@1&family=Rubik:wght@800&family=Shrikhand&display=swap');
 .parallax{
-    min-height: 2000px; 
+    min-height: 1000px; 
     background-image: url("../../../1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -8,7 +8,7 @@
     background-attachment: fixed;
   }
 .container-playlist-details{
-    margin-top: 90px;
+    margin-top: 25px;
 }
 
 .title-playlist{
@@ -19,7 +19,7 @@
 }
 .containerPlaylist{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 .playlistSongs{
     border: 2px solid black;

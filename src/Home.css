@@ -4,12 +4,13 @@
 /* } */ 
 
 .parallax{
-  min-height: 2000px; 
+  min-height: calc(20vh); 
   background-image: url("../1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  padding-top: 70px;
 }
 
 .containSearchAndRecomend{

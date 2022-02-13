@@ -4,33 +4,50 @@
     font-family: "Orelega One";
     color: black;
     background-color: white;
-    opacity: 0.4;
+    opacity: 0.6;
     font-size: 20px;
-    padding: 5px;
+    /* padding: 5px; */
     margin-left: 10px;
-    display: flex;
-    flex-direction: row;
-    width: 20%;
-    height: 300px;
+    /* display: flex;
+    flex-wrap: wrap;
+    flex-direction: row; */
+    width: 18%;
+    height: 270px;
+    margin-bottom: 25px;
 }
 .recomendSong:hover {
     /* box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2); */
     background-color: rgb(159, 150, 134);
   } 
+  .contain-recomend-img{
+     padding-right: 0;
+  }
   .containerRecommend{
-    padding: 2px 16px;
+    padding: 26px 16px;
     text-align: left;
+    text-align: center;
   }
   .img-recomend-song{
     width: 100%;
   }
   .nameOfSong{
-      font-size: 15px;
+      font-size: 20px;
   }
   .artistOfSong{
-      font-size: 10px;
+      font-size: 15px;
   }
-  /* .img-recomend-song{
-    width: 360;
-    height: 202;
+  .img-recomend-song{
+    /* width: 360; */
+    height: 222;
+  }
+  .likeIcon{
+    position: relative;
+    bottom: unset;
+    left: 188px;
+    display: flex;
+    background-color: aqua;
+    width: 50px;
+  }
+  /* .css-i4bv87-MuiSvgIcon-root{
+    display: flex;
   } */

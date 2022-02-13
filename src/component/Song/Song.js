@@ -1,5 +1,6 @@
 
 import "./Song.css"
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
 const Song = ({ id, name, by, image, onClickPlayer }) => {
@@ -16,6 +17,9 @@ const Song = ({ id, name, by, image, onClickPlayer }) => {
                 <h4><b>{name}</b></h4>
                 <p>{by}</p>
 
+                <div >
+                    <FavoriteBorderIcon />
+                </div>
             </div>
         </div>
     )
