@@ -43,6 +43,24 @@
 } */
 .icon-add-to-playlist{
     /* background-color: cadetblue; */
-    width: 5%;
+    width: 10%;
     margin-left: 96%;
+    position: relative;
+    top: -39px;
+}
+.title-of-song{
+    color: white;
+    margin-top: 35px;
+    display: inline-block;
+}
+.container-details-play{
+    padding-top: 7px;
+    /* padding-bottom: 17px; */
+    padding-left: 43px;
+    padding-right: 43px;
+    align-items: center;
+    height: 70px;
+}
+.iconClick:focus{
+    background-color: red;
 }

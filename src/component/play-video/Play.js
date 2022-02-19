@@ -1,27 +1,29 @@
 import "./Play.css"
 import ReactPlayer from "react-player";
 import Header from "../Header/Header";
-import RecomendSong from "../RocommendedSongs/RecomendSong";
+// import RecomendSong from "../RocommendedSongs/RecomendSong";
 import SideBar from "../SideBar/SideBar";
 import { useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Context from "../../Context/Context";
-import Playlist from "../Playlist/Playlist";
-import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-
 
 const Play = () => {
 
-    const { setPlaylist } = useContext(Context)
+    const { title } = useContext(Context)
+    // const { idOfSong } = useContext(Context)
+    console.log(title);
+    // console.log(idOfSong);
+    // const { setPlaylist } = useContext(Context)
     // const { userAccessToken } = useContext(Context);
     // const { urlSong } = useContext(Context)
     const [urlSearchSong, setUrlSearchSong] = useState()
-
     const [showSongPlay, setShowSongPlay] = useState([])
 
+    const { addSongToPlaylist } = useContext(Context)
+
     let { idSong } = useParams();
+    console.log(idSong);
 
     useEffect(() => {
         handleUrl(idSong)
@@ -35,42 +37,26 @@ const Play = () => {
         console.log(showSongPlay);
     }
 
-    const navigateToPlaylist = useNavigate();
 
-    const addSongToPlaylist = () => {
-        console.log("click");
-        navigateToPlaylist(`/Playlist`)
-    }
 
     return (
         <div className='parallax5'>
             <Header />
             <SideBar />
-            <div className="containerAllDetail">
+            <div className="containerAllDetail" >
                 <div className="playSomeSong">
                     <div className="playSong" id={idSong}>
                         <ReactPlayer controls
                             url={urlSearchSong}
                         />
-                        <p></p>
-                        {/* <div>
-                            {showSongPlay.map((ss) =>
-                                <div>
-                                    <h2>{ss.title}</h2>
-                                    <p>{ss.artist}</p>
-                                </div>
-                            )}
-                        </div> */}
-                        <div className="icon-add-to-playlist" onClick={() => addSongToPlaylist()}>
-                            <FavoriteBorderIcon />
+                        <div className="container-details-play">
+                            <p className="title-of-song"><b>{title}</b></p>
+                            <div className="icon-add-to-playlist" >
+                                <FavoriteBorderIcon className="iconClick" onClick={() => addSongToPlaylist(idSong)} />
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                {/* <h2 className="titlePlay">Recommended Songs</h2> */}
-                {/* <div className="playlistRecommendSong">
-                    <RecomendSong />
-                </div> */}
             </div>
         </div>
     )

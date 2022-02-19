@@ -1,15 +1,20 @@
 import "./Search.css"
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import SideBar from "../SideBar/SideBar";
 import Spinner from "../Spinner/Spinner";
-// import { Link } from "react-router-dom";
+import Context from "../../Context/Context";
 
-const Search = ({ onClick }) => {
+const Search = () => {
 
-    const [songs, setSongs] = useState([])
     const [spinner, setSpinner] = useState(<Spinner />);
+
+    const { songs, setSongs } = useContext(Context)
+    const { setTitle } = useContext(Context)
+    const { setIdOfSong } = useContext(Context)
+    // const [artist, setArtist] = useContext(Context)
+    // const [img, setImg] = useContext(Context)
 
     const navigate = useNavigate();
 
@@ -33,20 +38,19 @@ const Search = ({ onClick }) => {
     }
     console.log(songs);
 
-    // const [val, setVal] = useState("")
     const inputRef = useRef(null);
 
     useEffect(() => {
         inputRef.current.focus();
     })
 
-    const happendOnClick = (id) => {
+    const happendOnClick = (id, title, img) => {
         console.log("s");
-        // const searchClick = e.target.value
-        // console.log(searchClick);
-        console.log(id);
+        console.log(id, title);
+        setTitle(title)
+        setIdOfSong(id)
+        // setImg(img)
         navigate(`/Play/${id}`)
-        // searchh(e)
     }
 
     return (
@@ -61,7 +65,6 @@ const Search = ({ onClick }) => {
                         placeholder="Enter For Search "
                         aria-label="Search"
                         onChange={freeText}
-                        // value={val}
                         ref={inputRef} />
                 </form>
                 <div className="containerSearchAndRecomend">
@@ -69,7 +72,7 @@ const Search = ({ onClick }) => {
                         {songs.length > 0 ? (
                             <div className="SerchResult">
                                 {songs.map(song =>
-                                    <div className="resultOfSearch" id={song.id} onClick={() => happendOnClick(song.id)} >
+                                    <div className="resultOfSearch" id={song.id} onClick={() => happendOnClick(song.id, song.title, song.img.url)} >
                                         <img className="searchImg" src={song.img.url} alt={song.title} />
                                         <h5 className="titleResule">{song.title}</h5>
                                     </div>)}

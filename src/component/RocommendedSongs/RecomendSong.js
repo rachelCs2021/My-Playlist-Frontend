@@ -1,7 +1,7 @@
 import "./RecomendSong.css"
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ShowSong from "../ShowSong/ShowSong";
-import ReactPlayer from "react-player";
+// import ReactPlayer from "react-player";
 import Context from "../../Context/Context"
 import { useNavigate } from "react-router-dom";
 
@@ -53,28 +53,28 @@ const RecomendSong = () => {
         },
         {
             id: 'cNw8A5pwbVI',
-            name: "Do It Again ",
+            name: "Do It Again (Official Music Video)",
             by: "Pia Mia ft. Chris Brown, Tyga",
             img: "https://i.ytimg.com/vi/cNw8A5pwbVI/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCeHNcML1Iin2SNRm8mL7VFpF4p3g",
             url: "https://youtu.be/cNw8A5pwbVI"
         },
         {
             id: 'RdVx-GrnQzk',
-            name: "Thought About That ",
+            name: "Thought About That (Official Music Video)",
             by: "Noa Kirel",
             img: "https://i.ytimg.com/vi/RdVx-GrnQzk/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBxVdGMOnOlYsUY78IZ6gWtGdAJcQ",
             url: "https://youtu.be/RdVx-GrnQzk"
         },
         {
             id: 'zKCrSN9oXgQ',
-            name: " Ayo ",
+            name: "Ayo (Official Video)",
             by: "Chris Brown, Tyga",
             img: "https://i.ytimg.com/vi/zKCrSN9oXgQ/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAOrVFkR35mSAfgZf666ttm4dhdvA",
             url: "https://youtu.be/zKCrSN9oXgQ"
         },
         {
             id: '3AyMjyHu1bA',
-            name: "Intentions",
+            name: "Intentions (Official Video (Short Version)) ft. Quavo",
             by: "Justin Bieber",
             img: "https://i.ytimg.com/vi/3AyMjyHu1bA/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAC4OVDDFL_ttY6Y3pWwr3269Q9LA",
             url: "https://youtu.be/3AyMjyHu1bA"
@@ -84,11 +84,13 @@ const RecomendSong = () => {
     const [songsArr, setSongsArr] = useState(songsList);
     const [urlSong, setUrlSong] = useState()
     const navigateRecomendSong = useNavigate()
+    const { setTitle } = useContext(Context)
 
-    const showSongsR = (id) => {
+    const showSongsR = (id, name) => {
         console.log(id);
         navigateRecomendSong(`/Play/${id}`)
         setUrlSong(songsList.find(song => song.id === id).url)
+        setTitle(name)
     }
     console.log(urlSong);
 
@@ -105,7 +107,7 @@ const RecomendSong = () => {
                             img={song.img}
                             url={song.url}
                             //   remove={remove} 
-                            onClickPlayer={showSongsR}
+                            onClickPlayer={() => showSongsR(song.id, song.name)}
                         />)}
                 </div>
             </div>

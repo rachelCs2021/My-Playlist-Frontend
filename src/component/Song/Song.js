@@ -1,10 +1,19 @@
 
 import "./Song.css"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useNavigate } from "react-router-dom";
 
 
-const Song = ({ id, name, by, image, onClickPlayer }) => {
-    // console.log(id);
+const Song = ({ id, name, by, image, remove }) => {
+
+    const navigate = useNavigate();
+
+    const onClickPlayer = (id) => {
+        console.log("s");
+        console.log(id);
+        navigate(`/Play/${id}`)
+    }
+
     return (
 
         <div className="playlistSong" id={id} onClick={() => onClickPlayer(id)}>
@@ -17,7 +26,7 @@ const Song = ({ id, name, by, image, onClickPlayer }) => {
                 <h4><b>{name}</b></h4>
                 <p>{by}</p>
 
-                <div >
+                <div onClick={remove}>
                     <FavoriteBorderIcon />
                 </div>
             </div>
