@@ -13,8 +13,6 @@ const Search = () => {
     const { songs, setSongs } = useContext(Context)
     const { setTitle } = useContext(Context)
     const { setIdOfSong } = useContext(Context)
-    // const [artist, setArtist] = useContext(Context)
-    // const [img, setImg] = useContext(Context)
 
     const navigate = useNavigate();
 
@@ -30,11 +28,9 @@ const Search = () => {
                 setSongs(searchResult)
             }).catch(err => console.log(err))
 
-        if (songs.length === 0 || !songs) {
+        if (songs.length === 0) {
             setSpinner(<h1 className="noResultSearch">No Results</h1>);
         }
-        // if (songs.length > 0) {
-        // }
     }
     console.log(songs);
 
@@ -49,12 +45,12 @@ const Search = () => {
         console.log(id, title);
         setTitle(title)
         setIdOfSong(id)
-        // setImg(img)
         navigate(`/Play/${id}`)
+        // setSongs([])
     }
 
     return (
-        <div className="parallax5">
+        <div className="parallax">
             <Header />
             <SideBar />
             <div className="container-search">
@@ -69,7 +65,15 @@ const Search = () => {
                 </form>
                 <div className="containerSearchAndRecomend">
                     <div className="containerSearchResult">
-                        {songs.length > 0 ? (
+                        <div className="SerchResult">
+                            {songs.map(song =>
+                                <div className="resultOfSearch" id={song.id} onClick={() => happendOnClick(song.id, song.title, song.img.url)} >
+                                    <img className="searchImg" src={song.img.url} alt={song.title} />
+                                    <h5 className="titleResule">{song.title}</h5>
+                                </div>)}
+                        </div>
+
+                        {/* {songs.length > 0 ? (
                             <div className="SerchResult">
                                 {songs.map(song =>
                                     <div className="resultOfSearch" id={song.id} onClick={() => happendOnClick(song.id, song.title, song.img.url)} >
@@ -79,7 +83,7 @@ const Search = () => {
                             </div>
                         ) : (
                             spinner
-                        )}
+                        )} */}
                     </div>
                 </div>
             </div>

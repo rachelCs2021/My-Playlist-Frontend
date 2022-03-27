@@ -1,16 +1,12 @@
 
-/* .Home{
-  /* background-color: rgb(81, 81, 102); */
-/* } */ 
-
 .parallax{
-  min-height: calc(20vh); 
+  min-height: 721px; 
   background-image: url("../1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  padding-top: 70px;
+  padding-top: 60px;
 }
 
 .containSearchAndRecomend{

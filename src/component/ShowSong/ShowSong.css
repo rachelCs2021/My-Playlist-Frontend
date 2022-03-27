@@ -1,31 +1,28 @@
 
 .recomendSong{
-    border: 2px solid black;
+    border:  solid black;
     font-family: "Orelega One";
     color: black;
-    background-color: white;
-    opacity: 0.6;
     font-size: 20px;
-    /* padding: 5px; */
     margin-left: 10px;
-    /* display: flex;
-    flex-wrap: wrap;
-    flex-direction: row; */
     width: 18%;
     height: 270px;
     margin-bottom: 25px;
 }
 .recomendSong:hover {
-    /* box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2); */
-    background-color: rgb(159, 150, 134);
+    box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2);
+    background-color: rgb(151, 146, 137);
   } 
   .contain-recomend-img{
      padding-right: 0;
   }
   .containerRecommend{
-    padding: 26px 16px;
+    padding: 16px 16px;
     text-align: left;
     text-align: center;
+    background-color: white;
+    opacity: 0.6;
+    height: 53%;
   }
   .img-recomend-song{
     width: 100%;
@@ -37,17 +34,22 @@
       font-size: 15px;
   }
   .img-recomend-song{
-    /* width: 360; */
     height: 222;
   }
   .likeIcon{
     position: relative;
     bottom: unset;
-    left: 188px;
+    right: 28px;
     display: flex;
-    background-color: aqua;
-    width: 50px;
+    width: 10%;
+    margin-left: 96%;
+    position: relative;
+    top: -42px;
+    
   }
-  /* .css-i4bv87-MuiSvgIcon-root{
-    display: flex;
-  } */
+  
+  @media (max-width: 690px) {
+.recomendSong{
+   width: 80%;
+}
+  }

@@ -8,11 +8,11 @@ import {
     BrowserRouter as Router,
     Routes,
     Route,
-    Navigate
+    // Navigate
 } from "react-router-dom";
 import Playlist from "./component/Playlist/Playlist";
 import Register from "./component/Register/Register";
-
+import axios from "axios";
 
 const App = () => {
 
@@ -23,17 +23,156 @@ const App = () => {
     const [idOfSong, setIdOfSong] = useState()
     const [playlist, setPlaylist] = useState([])
     const [songs, setSongs] = useState([])
-    // const [artist, setArtist] = useState()
-    const [img, setImg] = useState()
+    const [userName, setUserName] = useState('')
+
+    console.log(token);
+
+    const songsList = [
+        {
+            id: 'xQzS3JnZQZM',
+            title: "The Middle (Lyrics) ft. Maren Morris",
+            artist: "Zedd, Grey",
+            img: {
+                url: "https://i.ytimg.com/vi/M3mJkSqZbX4/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAIR_pqdBz0jB5sWOJkcUPTvuJKPw",
+            },
+            url: "https://youtu.be/xQzS3JnZQZM"
+        },
+        {
+            id: 'yWEK4v9AVKQ',
+            title: " Stay (Official Music Video)",
+            artist: "Zedd, Alessia Cara",
+            img: {
+                url: "https://i.ytimg.com/vi/h--P8HzYZ74/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCmR2mvm9H9borLCcIwuJ_2sf2EDA",
+            },
+            url: "https://youtu.be/yWEK4v9AVKQ"
+        },
+        {
+            id: 'Ey_hgKCCYU4',
+            title: "Perfect Strangers ft. JP Cooper (Official Video)",
+            artist: "Jonas Blue",
+            img: {
+                url: "https://i.ytimg.com/vi/Ey_hgKCCYU4/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLABxEf6RNUF4MsDdiENsDjur4GwXw",
+            },
+            url: "https://youtu.be/Ey_hgKCCYU4"
+        },
+        {
+            id: 'qPTfXwPf_HM',
+            title: "Mama ft. William Singe (Official Video)",
+            artist: "Jonas Blue",
+            img: {
+                url: "https://i.ytimg.com/vi/qPTfXwPf_HM/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLDbNqM2eCyIcvhEYAFAsZ_n3JxM2A",
+            },
+            url: "https://youtu.be/qPTfXwPf_HM"
+        },
+        {
+            id: 'aJOTlE1K90k',
+            title: "Girls Like You (Lyrics)",
+            artist: "Maroon 5, Cardi B",
+            img: {
+                url: "https://i.ytimg.com/vi/aJOTlE1K90k/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBHIZaUFJHMGadi17DvvRQyCF_RgA",
+            },
+            url: "https://youtu.be/aJOTlE1K90k"
+        },
+        {
+            id: '9MeHPpdX54I',
+            title: "End Of Every Story",
+            artist: "Eyal Golan",
+            img: {
+                url: "https://i.ytimg.com/vi/9MeHPpdX54I/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBnbTlwxrSEXqBDxh8x4skAScM5Rg",
+            },
+            url: "https://youtu.be/9MeHPpdX54I"
+        },
+        {
+            id: 'cNw8A5pwbVI',
+            title: "Do It Again (Official Music Video)",
+            artist: "Pia Mia ft. Chris Brown, Tyga",
+            img: {
+                url: "https://i.ytimg.com/vi/cNw8A5pwbVI/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCeHNcML1Iin2SNRm8mL7VFpF4p3g",
+            },
+            url: "https://youtu.be/cNw8A5pwbVI"
+        },
+        {
+            id: 'RdVx-GrnQzk',
+            title: "Thought About That (Official Music Video)",
+            artist: "Noa Kirel",
+            img: {
+                url: "https://i.ytimg.com/vi/RdVx-GrnQzk/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBxVdGMOnOlYsUY78IZ6gWtGdAJcQ",
+            },
+            url: "https://youtu.be/RdVx-GrnQzk"
+        },
+        {
+            id: 'zKCrSN9oXgQ',
+            title: "Ayo (Official Video)",
+            artist: "Chris Brown, Tyga",
+            img: {
+                url: "https://i.ytimg.com/vi/zKCrSN9oXgQ/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAOrVFkR35mSAfgZf666ttm4dhdvA",
+            },
+            url: "https://youtu.be/zKCrSN9oXgQ"
+        },
+        {
+            id: '3AyMjyHu1bA',
+            title: "Intentions (Official Video (Short Version)) ft. Quavo",
+            artist: "Justin Bieber",
+            img: {
+                url: "https://i.ytimg.com/vi/3AyMjyHu1bA/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAC4OVDDFL_ttY6Y3pWwr3269Q9LA",
+            },
+            url: "https://youtu.be/3AyMjyHu1bA"
+        },
+    ]
 
     const addSongToPlaylist = (id) => {
-        // const changeColor = document.querySelector('iconClick')
-        // changeColor.style.backgroundColor = 'black'
-        console.log("click");
-        setPlaylist((prev) => {
-            const updateSongsList = [...prev]
+        console.log("clicked");
+        console.log(id);
+        const findSong = (songs.find(s => s.id === id) || songsList.find(s => s.id === id))
+        findSong.url = `https://youtu.be/${id}`
+
+        axios({
+            method: 'post',
+            url: 'http://localhost:4001/songs',
+            data: {
+                title: findSong.title,
+                artist: findSong.artist,
+                url: findSong.url,
+                user: "6202a9e1a80704f64345280a"
+            },
+            validateStatus: (status) => {
+                return status;
+            },
+        }).then(response => {
+            console.log(response);
+
+            axios({
+                method: 'post',
+                url: 'http://localhost:4001/playlist',
+                data: {
+                    response
+                },
+                validateStatus: (status) => {
+                    return true;
+                },
+            }).then(res => {
+                console.log(res);
+
+            }).catch(error => {
+                console.log(error);
+            })
+
+
+        }).catch(error => {
+            console.log(error);
+        })
+
+        setPlaylist((song) => {
+            const updateSongsList = [...song]
             console.log(updateSongsList);
-            updateSongsList.unshift(songs.find(s => s.id === id))
+
+            const findSong = (songs.find(s => s.id === id) || songsList.find(s => s.id === id))
+            console.log(findSong);
+
+            const songExist = playlist.find(f => f.id === id)
+            if (!songExist) {
+                updateSongsList.unshift(findSong)
+            }
             console.log(updateSongsList);
             return updateSongsList
         });
@@ -65,25 +204,26 @@ const App = () => {
                 setUserAccessToken,
                 title,
                 setTitle,
-                img,
-                setImg,
                 idOfSong,
                 setIdOfSong,
                 playlist,
                 setPlaylist,
                 addSongToPlaylist,
                 songs,
-                setSongs
+                setSongs,
+                songsList,
+                userName,
+                setUserName
             }}>
             <Router>
                 <Routes>
-                    {/* {token &&
-                        <> */}
-                    <Route exact path="/home" element={<Home />} />
-                    <Route exact path="/Playlist" element={<Playlist />} />
-                    <Route exact path="/Play/:idSong" element={<Play />} />
-                    <Route exact path="/search" element={<Search />} />
-                    {/* </>} */}
+                    {token &&
+                        <>
+                            <Route exact path="/home" element={<Home />} />
+                            <Route exact path="/Playlist" element={<Playlist />} />
+                            <Route exact path="/Play/:idSong" element={<Play />} />
+                            <Route exact path="/search" element={<Search />} />
+                        </>}
                     <Route exact path="/login" element={<LogIn />} />
                     <Route exact path="/register" element={<Register />} />
                     {/* {token || <Route

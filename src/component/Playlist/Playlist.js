@@ -2,20 +2,12 @@ import Song from "../Song/Song";
 import Header from "../Header/Header";
 import "./Playlist.css"
 import SideBar from "../SideBar/SideBar";
-import { useState, useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Context from "../../Context/Context";
 
 const Playlist = () => {
 
-    // const [urlSong, setUrlSong] = useState()
-    // const showSong = (id) => {
-    //     setUrlSong(songsList.find(song => song.id === id).url)
-    // }
-    // console.log(setSongsArr);
-    // console.log(urlSong);
-
-    const { title } = useContext(Context)
-    // const { img } = useContext(Context)
+    const { playlist, setPlaylist } = useContext(Context)
 
     const removeFromPlaylist = (id) => {
         console.log("remove");
@@ -23,7 +15,13 @@ const Playlist = () => {
         console.log(playlist);
     }
 
-    const { playlist, setPlaylist } = useContext(Context)
+    // useEffect(() => {
+    //     fetch(`http://localhost:4005/playlist`)
+    //         .then(res => res.json())
+    //         .then(song => {
+    //             console.log(song);
+    //         }).catch(err => console.log(err))
+    // })
 
     // const addToPlaylist = () => {
     //     setPlaylist(...playlist,)
@@ -74,9 +72,8 @@ const Playlist = () => {
     //     },
     // ]
 
-
     return (
-        <div className="parallax5">
+        <div className="parallax">
             <Header />
             <SideBar />
             <div className="container-playlist-details">
@@ -85,9 +82,20 @@ const Playlist = () => {
                 </div>
                 <div className="containerPlaylist">
                     <div className="playlistSongs">
-                        {/* {playlist.map(song => (
-                            <Song key={song.id} id={song.id} name={song.name} by={song.by} image={song.img} remove={removeFromPlaylist} />
-                        ))} */}
+                        {Object.keys(playlist).length > 0 ? (
+                            <div>
+                                {playlist.map(song => (
+                                    <Song
+                                        key={song.id}
+                                        id={song.id}
+                                        name={song.title}
+                                        by={song.artist}
+                                        image={song.img.url}
+                                        remove={removeFromPlaylist} />
+                                ))}
+                            </div>)
+                            : (<h1 className="noSongsPlaylist">No Playlist Songs </h1>)
+                        }
                     </div>
                 </div>
             </div>

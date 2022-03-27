@@ -1,21 +1,20 @@
 
 import * as React from 'react';
-// import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState, useContext } from "react";
 import Context from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useForm } from "react-hook-form";
+
 
 function Copyright(props) {
     return (
@@ -43,14 +42,23 @@ const theme = createTheme({
 
 export default function LogIn() {
 
-    const [userName, setUserName] = useState({})
     const [password, setPassword] = useState({})
+    const [passwordShown, setPasswordShown] = useState(false);
+    // console.log(userName);
+
+    const {
+        // register,
+        // handleSubmit,
+        // getValues,
+        // reset,
+        formState: { errors },
+    } = useForm();
 
     const navigateLogin = useNavigate();
+    const { userName, setUserName } = useContext(Context)
     const { setUserAccessToken } = useContext(Context);
 
     const handleLogin = () => {
-        // evn.preventDefault()
         fetch(`http://localhost:4001/users/login`,
             {
                 method: "POST",
@@ -60,11 +68,13 @@ export default function LogIn() {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                localStorage.setItem("Token", data.accessToken)
-                setUserAccessToken(data.accessToken);
-
-                if (localStorage.Token) {
+                if (!data.message) {
+                    console.log('data');
+                    localStorage.setItem("Token", data.accessToken)
+                    setUserAccessToken(data.accessToken);
                     navigateLogin("/home");
+                } else {
+                    console.log('datgga');
                 }
             })
             .catch((err) => {
@@ -76,7 +86,6 @@ export default function LogIn() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
         console.log({
             userName: data.get('userName'),
             password: data.get('password'),
@@ -96,6 +105,7 @@ export default function LogIn() {
                             flexDirection: 'column',
                             alignItems: 'center',
                             bgcolor: 'white',
+                            opacity: 0.6,
                             padding: 5,
                         }}
                     >
@@ -117,24 +127,40 @@ export default function LogIn() {
                                 }
                                 }
                             />
+                            {errors.username && (
+                                <div className="error-invalid-value">
+                                    {" "}
+                                    שדה זה חובה או שם המשתמש אינו תקין
+                                </div>
+                            )}
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
                                 name="password"
                                 label="Password"
-                                type="password"
+                                type={passwordShown ? "text" : "password"}
                                 id="password"
+
                                 autoComplete="current-password"
                                 onChange={({ target: { value } }) => {
                                     setPassword(value)
                                 }
                                 }
                             />
-                            <FormControlLabel
+                            {errors.password && (
+                                <div className="error-invalid-value">
+                                    שדה זה חובה או סיסמה אינה תקינה
+                                </div>
+                            )}
+                            <VisibilityIcon
+                                style={{ color: "black", position: "absolute", left: "850px", bottom: "140px" }}
+                                onClick={() => setPasswordShown(!passwordShown)}
+                            />
+                            {/* <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
-                            />
+                            /> */}
                             <Button
                                 type="submit"
                                 fullWidth

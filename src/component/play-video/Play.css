@@ -1,12 +1,4 @@
 
-.parallax{
-    height: 721px;
-    background-image: url("../../../1.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}  
 .titlePlay{
     text-align: center;
     color: white;
@@ -27,26 +19,13 @@
 }
 .playSomeSong{
     width: 50%; 
-    /* margin-left: 650px; */
     display: flex;
-    /* flex: 1 16%; */
-    /* justify-content: center; */
 }
-/* .playlistRecommendSong{
-    border: 2px solid black; */
-    /* padding: 20px;
-    margin-top: 30px;
-    margin-left: 20px;
-    margin-right: 20px; */
-    /* display: flex;
-    flex-direction: column;
-} */
 .icon-add-to-playlist{
-    /* background-color: cadetblue; */
     width: 10%;
     margin-left: 96%;
     position: relative;
-    top: -39px;
+    top: -42px;
 }
 .title-of-song{
     color: white;
@@ -54,13 +33,35 @@
     display: inline-block;
 }
 .container-details-play{
-    padding-top: 7px;
-    /* padding-bottom: 17px; */
-    padding-left: 43px;
+    padding-left: 23px;
     padding-right: 43px;
     align-items: center;
     height: 70px;
 }
-.iconClick:focus{
-    background-color: red;
+
+@media (max-width: 600px) {
+    .play-the-song{
+        width: 185% !important;
+        height: 160% !important;
+    }
+    .playSong{
+        /* width: 143%; */
+        height: 60%;
+        margin-left: 10%;
+        padding: 20px;
+    }
+    .container-details-play{
+        width: 200%;
+        padding-top: 0;
+        margin-left: -9px;
+    }
+    .title-of-song{
+        margin-top: 10px;
+    }
+    .icon-add-to-playlist{
+        top: -51px;
+    }
+    .playSong{
+        border: none;
+    }
 }

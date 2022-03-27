@@ -15,6 +15,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
 
 function Copyright(props) {
     return (
@@ -44,13 +46,14 @@ export default function Register() {
 
     const [userName, setUserName] = useState({})
     const [password, setPassword] = useState({})
+    const [passwordShown, setPasswordShown] = useState(false);
     const [email, setEmail] = useState({})
 
     const navigateRegister = useNavigate();
 
     const handleRegister = () => {
 
-        fetch(`http://localhost:4001/users/register`,
+        fetch(`http://localhost:4005/users/register`,
             {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -94,6 +97,7 @@ export default function Register() {
                             flexDirection: 'column',
                             alignItems: 'center',
                             bgcolor: 'white',
+                            opacity: 0.6,
                             padding: 5,
                         }}
                     >
@@ -147,13 +151,17 @@ export default function Register() {
                                         fullWidth
                                         name="password"
                                         label="Password"
-                                        type="password"
+                                        type={passwordShown ? "text" : "password"}
                                         id="password"
                                         autoComplete="new-password"
                                         onChange={({ target: { value } }) => {
                                             setPassword(value)
                                         }
                                         }
+                                    />
+                                    <VisibilityIcon
+                                        style={{ color: "black", position: "absolute", left: "855px", bottom: "75px" }}
+                                        onClick={() => setPasswordShown(!passwordShown)}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>

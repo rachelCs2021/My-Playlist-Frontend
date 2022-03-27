@@ -6,7 +6,6 @@
     padding-right: 30px;
     padding-left: 30px;
     margin-left: 85%;
-    /* margin-top: 5%; */
     direction: rtl;
 }
 .container-title-and-icon{
@@ -15,10 +14,27 @@
     align-items: center;
     padding-right: 8px;
 }
+.playlistTitle{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.css-i4bv87-MuiSvgIcon-root{
+    color: white;
+    margin-left: 2%;
+}
 .container-title-and-icon:hover{
    background-color: rgb(110, 62, 62);
 }
 .title-of-sidebar{
     color: white;
     margin-left: 13px;
+}
+@media (max-width: 600px) {
+    .title-of-sidebar{
+        display: none;
+    }
+    .container-title-and-icon{
+        padding-right: 0px;
+    }
 }

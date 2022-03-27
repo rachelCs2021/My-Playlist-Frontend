@@ -1,12 +1,4 @@
-.parallax5{
-    min-height: 720px; 
-    background-image: url("../../../1.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding-top: 60px;
-  }
+
   .container-search{
       margin-top: 20px;
       padding-top: 30px;
@@ -15,8 +7,6 @@
     width: 25%;
     margin-left: 31%;
     background-color: rgb(248, 248, 248);
-    /* margin-top: 100px; */
-    /* position: fixed; */
 }
 .containerSearchResult{
     display: flex;
@@ -26,7 +16,6 @@
    margin-top: 42px;
    display: flex;
    flex-direction: column;
-   /* width: 80%; */
 }
 .resultOfSearch{
     height: 150px;
@@ -34,7 +23,6 @@
     margin: 10px;
     padding: 10px;
     background-color: rgb(192, 170, 170);
-    /* opacity: 0.5; */
     width: 967px;
     margin-left: 15%;
    border-radius: 5px;
@@ -49,16 +37,22 @@
     margin-top: 16px;
     margin-right: 20px;
     color: black;
-    /* border: 2px solid black; */
 }
 .containerSearchAndRecomend{
     display: flex;
 }
 .noResultSearch{
     color: white;
-    /* margin-left: 40%; */
     font-size: 2rem;
    margin-left: 46%;
    margin-top: 2%;
-    /* background-color: aqua; */
+}
+@media (max-width: 600px) {
+    .searchInput{
+        width: 55%;
+        margin-left: 15%;
+    }
+    .noResultSearch{
+        margin-left: 28%;
+    }
 }

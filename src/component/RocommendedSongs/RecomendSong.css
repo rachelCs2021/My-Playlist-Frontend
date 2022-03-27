@@ -1,7 +1,6 @@
 
 
 .showRecomendSong{
-    /* background-color: brown; */
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -9,4 +8,7 @@
     padding: 20px;
     margin-top: 47px;
     margin-left: 25px;
+}
+@media (max-width: 690px){
+    
 }
