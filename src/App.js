@@ -1,36 +1,34 @@
 import axios from "axios";
 import Home from "./Home";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Play from "./component/play-video/Play";
 import LogIn from "./component/login/LogIn";
 import Search from "./component/Search-song/Search";
 import Modall from "./Modal/Modal"
 import Context from "./Context/Context";
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    // Navigate
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  // Navigate
 } from "react-router-dom";
 import Playlist from "./component/Playlist/Playlist";
 import Register from "./component/Register/Register";
 
 const App = () => {
+  const [token, setToken] = useState();
+  const [userAccessToken, setUserAccessToken] = useState(null);
+  const [isUserConnected, setUserConnected] = useState(false);
+  const [title, setTitle] = useState();
+  const [idOfSong, setIdOfSong] = useState();
+  const [playlist, setPlaylist] = useState([]);
+  const [songs, setSongs] = useState([]);
+  const [userName, setUserName] = useState("");
+  const [showModal, setShowModal] = useState(false)
 
-    const [token, setToken] = useState()
-    const [userAccessToken, setUserAccessToken] = useState(null);
-    const [isUserConnected, setUserConnected] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-    const [title, setTitle] = useState()
-    const [idOfSong, setIdOfSong] = useState()
-    const [playlist, setPlaylist] = useState([])
-    const [songs, setSongs] = useState([])
-    const [userName, setUserName] = useState('')
-
-
-    const handleShow = () => setShowModal(true);
-    const handleClose = () => setShowModal(false);
-
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
+ 
     // console.log(token);
 
     useEffect(() => {
@@ -175,6 +173,21 @@ const App = () => {
         console.log(findSong);
         findSong.url = `https://youtu.be/${id}`
 
+    axios({
+      method: "post",
+      url: "http://localhost:4001/songs",
+      data: {
+        title: findSong.title,
+        artist: findSong.artist,
+        url: findSong.url,
+        user: "6202a9e1a80704f64345280a",
+      },
+      validateStatus: (status) => {
+        return status;
+      },
+    })
+      .then((response) => {
+        console.log(response);
         axios({
             method: "post",
             url: "http://localhost:4001/songs",
@@ -223,8 +236,37 @@ const App = () => {
             console.log(updateSongsList);
             return updateSongsList
         });
-        console.log(playlist);
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    setPlaylist((song) => {
+      const updateSongsList = [...song];
+      console.log(updateSongsList);
+
+      const findSong = songs.find((s) => s.id === id) || songsList.find((s) => s.id === id);
+      console.log(findSong);
+
+      const songExist = playlist.find((f) => f.id === id);
+      if (!songExist) {
+        updateSongsList.unshift(findSong);
+      }
+      console.log(updateSongsList);
+      return updateSongsList;
+    });
+    console.log(playlist);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("Token");
+    if (token) {
+      setUserAccessToken(token);
     }
+  }, []);
 
     const removeFromPlaylist = (id) => {
         console.log("remove");
@@ -272,10 +314,10 @@ const App = () => {
                         path="*"
                         element={<Navigate to="/login" />}
                     />} */}
-                </Routes>
-            </Router>
-        </Context.Provider>
-    )
-}
+        </Routes>
+      </Router>
+    </Context.Provider>
+  );
+};
 
 export default App;
