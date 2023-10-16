@@ -1,12 +1,10 @@
 import "./Header.css"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import Context from "../../Context/Context";
 
 const Header = () => {
 
-    const { userName } = useContext(Context)
+    let userName = localStorage.getItem("userName");
 
     const navigateToLogin = useNavigate()
     const happendOnClickUser = () => {
@@ -23,7 +21,7 @@ const Header = () => {
                     <h5 className="helloUser">Hello, {userName ? userName : 'guest'}</h5>
                     <AccountCircleIcon
                         onClick={() => happendOnClickUser()}
-                        style={{ color: "white", position: "absolute", right: "25px" }} />
+                        style={{ color: "white", position: "absolute", right: "25px", marginLeft: "10px" }} />
                 </div>
             </nav>
         </div>

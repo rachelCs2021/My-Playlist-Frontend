@@ -2,7 +2,7 @@ import Song from "../Song/Song";
 import Header from "../Header/Header";
 import "./Playlist.css"
 import SideBar from "../SideBar/SideBar";
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Context from "../../Context/Context";
 
 const Playlist = () => {
@@ -11,6 +11,7 @@ const Playlist = () => {
 
     const removeFromPlaylist = (id) => {
         console.log("remove");
+        console.log(id);
         setPlaylist(playlist.filter((song) => song.id !== id));
         console.log(playlist);
     }

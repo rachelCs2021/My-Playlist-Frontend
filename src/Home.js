@@ -4,7 +4,6 @@ import Header from './component/Header/Header';
 import SideBar from './component/SideBar/SideBar';
 import RecomendSong from './component/RocommendedSongs/RecomendSong';
 
-
 const Home = () => {
 
   return (

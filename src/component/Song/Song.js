@@ -1,9 +1,9 @@
 import "./Song.css"
 // import FavoriteIcon from '@mui/icons-material/Favorite';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import Context from "../../Context/Context";
+import { useNavigate } from "react-router-dom";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const Song = ({ id, name, by, image, remove }) => {
 
@@ -11,7 +11,6 @@ const Song = ({ id, name, by, image, remove }) => {
     const { setTitle } = useContext(Context)
 
     const onClickPlayer = (id, name) => {
-        console.log("s");
         console.log(id);
         setTitle(name)
         navigate(`/Play/${id}`)

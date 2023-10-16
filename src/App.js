@@ -1,8 +1,10 @@
+import axios from "axios";
 import Home from "./Home";
 import React, { useEffect, useState } from "react";
 import Play from "./component/play-video/Play";
 import LogIn from "./component/login/LogIn";
 import Search from "./component/Search-song/Search";
+import Modall from "./Modal/Modal"
 import Context from "./Context/Context";
 import {
     BrowserRouter as Router,
@@ -12,20 +14,42 @@ import {
 } from "react-router-dom";
 import Playlist from "./component/Playlist/Playlist";
 import Register from "./component/Register/Register";
-import axios from "axios";
 
 const App = () => {
 
     const [token, setToken] = useState()
     const [userAccessToken, setUserAccessToken] = useState(null);
     const [isUserConnected, setUserConnected] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [title, setTitle] = useState()
     const [idOfSong, setIdOfSong] = useState()
     const [playlist, setPlaylist] = useState([])
     const [songs, setSongs] = useState([])
     const [userName, setUserName] = useState('')
 
-    console.log(token);
+
+    const handleShow = () => setShowModal(true);
+    const handleClose = () => setShowModal(false);
+
+    // console.log(token);
+
+    useEffect(() => {
+        const token = localStorage.getItem("Token");
+        if (token) {
+            setUserAccessToken(token);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!userAccessToken) {
+            setUserConnected(false);
+            return;
+        }
+        setUserConnected(true);
+        setToken(true)
+    }, [userAccessToken]);
+
+    console.log(userAccessToken);
 
     const songsList = [
         {
@@ -120,47 +144,70 @@ const App = () => {
         },
     ]
 
+    const addToPlaylistIfExist = (id) => {
+        console.log(isUserConnected);
+        if (!isUserConnected) {
+            addSongToPlaylist(id)
+        } else {
+            console.log("not connect");
+            setShowModal(true)
+            openModal()
+            handleShow()
+        }
+    }
+
+    const openModal = () => {
+        alert("No User Connect")
+        return (
+            <div>
+                <button>open modal</button>
+                <Modall
+                    show={showModal}
+                />
+            </div>
+        )
+    }
+
     const addSongToPlaylist = (id) => {
         console.log("clicked");
         console.log(id);
         const findSong = (songs.find(s => s.id === id) || songsList.find(s => s.id === id))
+        console.log(findSong);
         findSong.url = `https://youtu.be/${id}`
 
         axios({
-            method: 'post',
-            url: 'http://localhost:4001/songs',
+            method: "post",
+            url: "http://localhost:4001/songs",
             data: {
                 title: findSong.title,
                 artist: findSong.artist,
                 url: findSong.url,
-                user: "6202a9e1a80704f64345280a"
+                user: "6202a9e1a80704f64345280a",
             },
             validateStatus: (status) => {
                 return status;
             },
-        }).then(response => {
-            console.log(response);
-
-            axios({
-                method: 'post',
-                url: 'http://localhost:4001/playlist',
-                data: {
-                    response
-                },
-                validateStatus: (status) => {
-                    return true;
-                },
-            }).then(res => {
-                console.log(res);
-
-            }).catch(error => {
-                console.log(error);
-            })
-
-
-        }).catch(error => {
-            console.log(error);
         })
+            .then((response) => {
+                console.log(response);
+                // axios({
+                //     method: "put",
+                //     url: "http://localhost:4001/playlist",
+                //     data: {
+                //         song: response,
+                //         user: "6202a9e1a80704f64345280a",
+                //     },
+                //     validateStatus: (status) => {
+                //         return true;
+                //     },
+                // });
+            })
+            // .then((res) => {
+            //     console.log(res);
+            // })
+            .catch((error) => {
+                console.log(error);
+            });
 
         setPlaylist((song) => {
             const updateSongsList = [...song]
@@ -179,22 +226,11 @@ const App = () => {
         console.log(playlist);
     }
 
-    useEffect(() => {
-        const token = localStorage.getItem("Token");
-        if (token) {
-            setUserAccessToken(token);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (!userAccessToken) {
-            setUserConnected(false);
-            return;
-        }
-        setUserConnected(true);
-        setToken(true)
-    }, [userAccessToken]);
-
+    const removeFromPlaylist = (id) => {
+        console.log("remove");
+        setPlaylist(playlist.filter((song) => song.id !== id));
+        console.log(playlist);
+    }
 
     return (
         <Context.Provider
@@ -208,18 +244,24 @@ const App = () => {
                 setIdOfSong,
                 playlist,
                 setPlaylist,
+                addToPlaylistIfExist,
                 addSongToPlaylist,
                 songs,
                 setSongs,
                 songsList,
                 userName,
-                setUserName
+                setUserName,
+                removeFromPlaylist,
+                handleClose,
+                handleShow,
+                showModal,
+                setShowModal
             }}>
             <Router>
                 <Routes>
                     {token &&
                         <>
-                            <Route exact path="/home" element={<Home />} />
+                            <Route exact path="/" element={<Home />} />
                             <Route exact path="/Playlist" element={<Playlist />} />
                             <Route exact path="/Play/:idSong" element={<Play />} />
                             <Route exact path="/search" element={<Search />} />

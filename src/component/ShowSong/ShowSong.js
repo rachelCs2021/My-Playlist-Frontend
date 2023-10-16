@@ -6,28 +6,21 @@ import { useContext, useState } from "react";
 
 const ShowSong = ({ id, name, by, img, onClickPlayer }) => {
 
-    const { addSongToPlaylist } = useContext(Context)
+    const { addToPlaylistIfExist } = useContext(Context)
+    // const { addSongToPlaylist } = useContext(Context)
+    const { removeFromPlaylist } = useContext(Context)
+    // const { isUserConnected } = useContext(Context)
 
-    const { playlist, setPlaylist } = useContext(Context)
     const [color, setColor] = useState(false)
     const [onClick, setOnClick] = useState(true)
 
-    const removeFromPlaylist = (id) => {
-        console.log("remove");
-        setPlaylist(playlist.filter((song) => song.id !== id));
-        console.log(playlist);
-    }
-
     const happendOnClick = (id) => {
         setOnClick(!onClick)
-        console.log("click");
         if (onClick) {
-            console.log("adddd");
-            addSongToPlaylist(id)
+            addToPlaylistIfExist(id)
             setColor(true)
         }
         else if (!onClick) {
-            console.log("removeee");
             removeFromPlaylist(id)
             setColor(false)
         }
@@ -35,10 +28,9 @@ const ShowSong = ({ id, name, by, img, onClickPlayer }) => {
             console.log("bla");
         }
     }
-    console.log(color);
+
 
     return (
-
         <div className="recomendSong" id={id} >
             <div className="contain-recomend-img" onClick={() => onClickPlayer(id)}>
                 <img src={img} alt={name} className="img-recomend-song" />
@@ -50,6 +42,7 @@ const ShowSong = ({ id, name, by, img, onClickPlayer }) => {
             <div className="likeIcon">
                 <FavoriteIcon
                     className="favoriteIcon"
+                    id="like-icon"
                     onClick={() => happendOnClick(id)}
                     style={{ color: !color ? "black" : "red" }}
                 />

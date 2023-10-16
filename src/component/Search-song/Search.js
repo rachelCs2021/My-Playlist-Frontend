@@ -17,9 +17,7 @@ const Search = () => {
     const navigate = useNavigate();
 
     const freeText = (e) => {
-        console.log("search");
         const text = e.target.value;
-        console.log(text);
         fetch(`http://localhost:4001/search?q=${text}`)
             .then(res => res.json())
             .then(song => {
@@ -65,13 +63,16 @@ const Search = () => {
                 </form>
                 <div className="containerSearchAndRecomend">
                     <div className="containerSearchResult">
-                        <div className="SerchResult">
-                            {songs.map(song =>
-                                <div className="resultOfSearch" id={song.id} onClick={() => happendOnClick(song.id, song.title, song.img.url)} >
-                                    <img className="searchImg" src={song.img.url} alt={song.title} />
-                                    <h5 className="titleResule">{song.title}</h5>
-                                </div>)}
-                        </div>
+                        {songs.lenght > 0 ?
+                            (
+                                <div className="SerchResult">
+                                    {songs.map(song =>
+                                        <div className="resultOfSearch" id={song.id} onClick={() => happendOnClick(song.id, song.title, song.img.url)} >
+                                            <img className="searchImg" src={song.img.url} alt={song.title} />
+                                            <h5 className="titleResule">{song.title}</h5>
+                                        </div>)}
+                                </div>)
+                            : <div className="noResultSearch">No Results</div>}
 
                         {/* {songs.length > 0 ? (
                             <div className="SerchResult">

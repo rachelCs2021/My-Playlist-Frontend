@@ -19,12 +19,7 @@ import { useForm } from "react-hook-form";
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
+            {'Copyright © Rachel'}
         </Typography>
     );
 }
@@ -71,8 +66,9 @@ export default function LogIn() {
                 if (!data.message) {
                     console.log('data');
                     localStorage.setItem("Token", data.accessToken)
+                    localStorage.setItem("userName", userName);
                     setUserAccessToken(data.accessToken);
-                    navigateLogin("/home");
+                    navigateLogin("/");
                 } else {
                     console.log('datgga');
                 }
@@ -130,7 +126,7 @@ export default function LogIn() {
                             {errors.username && (
                                 <div className="error-invalid-value">
                                     {" "}
-                                    שדה זה חובה או שם המשתמש אינו תקין
+                                    שם המשתמש אינו תקין
                                 </div>
                             )}
                             <TextField
@@ -154,7 +150,7 @@ export default function LogIn() {
                                 </div>
                             )}
                             <VisibilityIcon
-                                style={{ color: "black", position: "absolute", left: "850px", bottom: "140px" }}
+                                style={{ color: "black", position: "absolute", left: "850px", bottom: "116px" }}
                                 onClick={() => setPasswordShown(!passwordShown)}
                             />
                             {/* <FormControlLabel

@@ -13,15 +13,16 @@ const Play = () => {
     const [showSongPlay, setShowSongPlay] = useState([])
     const [Click, setClick] = useState(true)
     const [color, setColor] = useState(false)
+
     const { addSongToPlaylist } = useContext(Context)
-    const { playlist, setPlaylist } = useContext(Context)
+    const { removeFromPlaylist } = useContext(Context)
 
     let { title } = useContext(Context)
     console.log(title);
 
-    if (title.length > 50) {
-        title = title.slice(0, 70) + String("...");
-    }
+    // if (title.length > 50) {
+    //     title = title.slice(0, 70) + String("...");
+    // }
     let { idSong } = useParams();
 
     useEffect(() => {
@@ -42,12 +43,6 @@ const Play = () => {
         setUrlSearchSong(showSearchSong)
         setShowSongPlay(showSearchSong)
         console.log(showSongPlay);
-    }
-
-    const removeFromPlaylist = (id) => {
-        console.log("remove");
-        setPlaylist(playlist.filter((song) => song.id !== id));
-        console.log(playlist);
     }
 
     const happendOnClickPlay = (id) => {
@@ -79,7 +74,6 @@ const Play = () => {
                         <ReactPlayer controls
                             url={urlSearchSong}
                             className="play-the-song"
-                        // width={"100%"} height={"50%"}
                         />
                         <div className="container-details-play">
                             <p className="title-of-song"><b>{title}</b></p>

@@ -65,7 +65,7 @@ export default function Register() {
                 localStorage.setItem("Token", data.accessToken)
                 // setUserAccessToken(res.data.token);
                 if (data.accessToken) {
-                    return navigateRegister("/home");
+                    return navigateRegister("/");
                 }
             })
             .catch((err) => {

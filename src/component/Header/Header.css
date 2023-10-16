@@ -6,6 +6,7 @@
     position: fixed;
     width: 100%;
 }
+
 .mainTitle{
     color: rgb(110, 62, 62);
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
@@ -13,18 +14,14 @@
     font-family: 'Fredoka One', cursive;
     font-size: 50px;
 }
-/* .containerIcons{
-    margin-right: 1%;
-    display: flex;
-    padding: 10px;
-    margin-top: 2%;
-} */
+
 .privateArea{
     min-width: 160px;
     position: relative;
     left: 89%;
     bottom: 26%;
     display: flex;
+    
 }
 .helloUser{
     color: white;
